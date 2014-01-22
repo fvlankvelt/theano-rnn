@@ -49,7 +49,7 @@ def test_real(n_updates=100):
 
     opt = hf_optimizer(p=model.rnn.params, inputs=[model.x, model.y],
                        s=model.rnn.y_pred,
-                       costs=[model.rnn.loss(model.y)], h=model.rnn.h)
+                       costs=[model.rnn.loss(model.y)], h=(model.rnn.h + 1)/2)
 
     opt.train(gradient_dataset, cg_dataset, num_updates=n_updates)
 
@@ -111,7 +111,7 @@ def test_binary(multiple_out=False, n_updates=250):
     opt = hf_optimizer(p=model.rnn.params, inputs=[model.x, model.y],
                        s=model.rnn.y_pred,
                        costs=[model.rnn.loss(model.y),
-                              model.rnn.errors(model.y)], h=model.rnn.h)
+                              model.rnn.errors(model.y)], h=(model.rnn.h + 1)/2)
 
     # using settings of initial_lambda and mu given in Nicolas' RNN example
     # seem to do a little worse than the default
@@ -181,7 +181,7 @@ def test_softmax(n_updates=250):
     opt = hf_optimizer(p=model.rnn.params, inputs=[model.x, model.y],
                        s=model.rnn.y_pred,
                        costs=[model.rnn.loss(model.y),
-                              model.rnn.errors(model.y)], h=model.rnn.h)
+                              model.rnn.errors(model.y)], h=(model.rnn.h + 1)/2)
 
     # using settings of initial_lambda and mu given in Nicolas' RNN example
     # seem to do a little worse than the default
